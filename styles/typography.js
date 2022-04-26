@@ -17,3 +17,9 @@ export const normal = {
     fontSize: 20,
     marginBottom: 28,
 };
+
+export const label = {
+    fontSize: 20,
+    marginBottom: 5,
+    color: "gray"
+}

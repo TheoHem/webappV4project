@@ -16,3 +16,10 @@ export const errorText = {
     color: 'red',
     textAlign: 'center'
 };
+
+export const base = {
+    flex: 1,
+    backgroundColor: '#fff',
+    paddingLeft: 12,
+    paddingRight: 12
+}
