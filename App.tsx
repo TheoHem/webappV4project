@@ -7,6 +7,7 @@ import Pick from "./components/Pick.tsx";
 import Deliveries from "./components/Deliveries.tsx";
 import Auth from "./components/auth/Auth.tsx";
 import Invoices from "./components/invoices/Invoices.tsx";
+import Ship from "./components/Ship.tsx";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
@@ -22,6 +23,7 @@ const routeIcons = {
   "Inleverans": "car",
   "Logga in": "key",
   "Faktura": "cash",
+  "Leverans": "map",
 };
 
 export default function App() {
@@ -29,6 +31,7 @@ export default function App() {
   const [deliveries, setDeliveries] = useState([]);
   const [invoices, setInvoices] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
+  const [readyToShip, setReadyToShip] = useState([]);
   /*
   useEffect(async () => {
     setIsLoggedIn(await AuthModel.loggedIn());
@@ -64,6 +67,9 @@ export default function App() {
             {() => <Auth setIsLoggedIn={setIsLoggedIn} />}
           </Tab.Screen>
         }
+        <Tab.Screen name="Leverans">
+          {() => <Ship readyToShip={readyToShip} setReadyToShip={setReadyToShip} />}
+        </Tab.Screen>
 
         
     </Tab.Navigator>
