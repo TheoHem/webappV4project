@@ -1,6 +1,4 @@
 import { render } from '@testing-library/react-native';
-import Home from '../components/StockList';
-import StockList from '../components/StockList';
 import OrderList from '../components/OrderList';
 
 const products = [
