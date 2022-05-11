@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import FlashMessage from "react-native-flash-message";
 import Home from "./components/Home.tsx";
 import Pick from "./components/Pick.tsx";
 import Deliveries from "./components/Deliveries.tsx";
@@ -31,7 +32,7 @@ export default function App() {
   const [deliveries, setDeliveries] = useState([]);
   const [invoices, setInvoices] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
-  const [readyToShip, setReadyToShip] = useState([]);
+  
   /*
   useEffect(async () => {
     setIsLoggedIn(await AuthModel.loggedIn());
@@ -68,13 +69,14 @@ export default function App() {
           </Tab.Screen>
         }
         <Tab.Screen name="Leverans">
-          {() => <Ship readyToShip={readyToShip} setReadyToShip={setReadyToShip} />}
+          {() => <Ship/>}
         </Tab.Screen>
 
         
     </Tab.Navigator>
       </NavigationContainer>
       <StatusBar style="auto" />
+      <FlashMessage position="top" />
     </SafeAreaView>
   );
 }

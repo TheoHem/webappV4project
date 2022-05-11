@@ -6,6 +6,7 @@ import productModel from "../models/products";
 import deliveryModel from "../models/delivery";
 import Delivery from '../interfaces/delivery';
 import Product from '../interfaces/product';
+import { showMessage } from "react-native-flash-message";
 
 function ProductDropDown(props) {
     const [products, setProducts] = useState<Product[]>([]);
@@ -123,7 +124,15 @@ export default function DeliveryForm({ navigation, setDeliveries, setProducts })
             <Button
                 title="Gör inleverans"
                 onPress={() => {
-                    addDelivery();
+                    if (delivery.product_id && delivery.comment && delivery.delivery_date && delivery.amount) {
+                        addDelivery();
+                    } else {
+                        showMessage({
+                            message: "Saknas",
+                            description: "Ett av fälten är ej korrekt ifyllt",
+                            type: "warning",
+                        });
+                    }
                 }}
             />
         </ScrollView>
