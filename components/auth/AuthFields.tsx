@@ -7,7 +7,7 @@ export default function AuthFields({ auth, setAuth, title, submit, navigation}) 
             <Text style={Typography.header2}>{title}</Text>
             <Text style={Typography.label}>E-post</Text>
             <TextInput
-                style={Forms.input}
+                style={Forms.inputLogin}
                 onChangeText={(content: string) => {
                     setAuth({ ...auth, email: content })
                 }}
@@ -16,7 +16,7 @@ export default function AuthFields({ auth, setAuth, title, submit, navigation}) 
             />
             <Text style={Typography.label}>Lösenord</Text>
             <TextInput
-                style={Forms.input}
+                style={Forms.inputLogin}
                 onChangeText={(content: string) => {
                     setAuth({ ...auth, password: content })
                 }}

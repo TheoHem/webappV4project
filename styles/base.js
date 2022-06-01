@@ -23,3 +23,12 @@ export const base = {
     paddingLeft: 12,
     paddingRight: 12
 }
+
+export const delayCard = {
+    backgroundColor: "#fff",
+    marginBottom: 10,
+    borderColor: "#eaeaea",
+    borderWidth: "1px",
+    padding: 10,
+    borderRadius: 10
+}

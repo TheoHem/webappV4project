@@ -1,4 +1,7 @@
 {
     "api_key": "120459dd7b2eb4e883b8d8e4b16bd6b7",
-    "base_url": "https://lager.emilfolino.se/v2"
+    "base_url_old": "https://lager.emilfolino.se/v2",
+    "base_url": "https://trafik.emilfolino.se",
+    "auth_url": "https://auth.emilfolino.se",
+    "auth_api_key": "df1b27d984fc137d6ce712fc13130711"
 }

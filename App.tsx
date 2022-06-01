@@ -1,28 +1,28 @@
 import { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import FlashMessage from "react-native-flash-message";
-import Home from "./components/Home.tsx";
-import Pick from "./components/Pick.tsx";
-import Deliveries from "./components/Deliveries.tsx";
-import Auth from "./components/auth/Auth.tsx";
-import Invoices from "./components/invoices/Invoices.tsx";
-import Ship from "./components/Ship.tsx";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import config from "../config/config.json";
-import productModel from "./models/products.ts";
+import { Base, Typography, Forms } from './styles';
+
+import Delay from "./components/Delay.tsx";
+import Favourite from "./components/Favourite.tsx"
+import Auth from "./components/auth/Auth.tsx";
+
 import AuthModel from './models/auth';
 
 const Tab = createBottomTabNavigator();
 
 const routeIcons = {
-  "Lager": "home",
+  "Försening": "train",
+  "Favoriter": "heart",
   "Plock": "list",
   "Inleverans": "car",
-  "Logga in": "key",
+  "Logga in": "person",
   "Faktura": "cash",
   "Leverans": "map",
 };
@@ -32,48 +32,47 @@ export default function App() {
   const [deliveries, setDeliveries] = useState([]);
   const [invoices, setInvoices] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
+  const [delays, setDelays] = useState([]);
   
   /*
   useEffect(async () => {
-    setIsLoggedIn(await AuthModel.loggedIn());
+    setIsLoggedIn(true);
   }, []);
+
+
+  screenOptions={{
+                header: ({route}) => <Text>Hello</Text>
+            }}
   */
+  
   return (
     <SafeAreaView style={styles.container}>
       <NavigationContainer>
-      <Tab.Navigator screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName = routeIcons[route.name] || "alert";
+        <Tab.Navigator screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName = routeIcons[route.name] || "alert";
 
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-          tabBarActiveTintColor: 'blue',
-          tabBarInactiveTintColor: 'gray',
-        })}
-      >
-        <Tab.Screen name="Lager">
-          {() => <Home products={products} setProducts={setProducts} />}
-        </Tab.Screen>
-        <Tab.Screen name="Plock">
-          {() => <Pick products={products} setProducts={setProducts} />}
-        </Tab.Screen>
-        <Tab.Screen name="Inleverans">
-          {() => <Deliveries deliveries={deliveries} setDeliveries={setDeliveries} setProducts={setProducts} />}
-        </Tab.Screen>
-        {isLoggedIn ?
-          <Tab.Screen name="Faktura">
-            {() => <Invoices invoices={invoices} setInvoices={setInvoices} setIsLoggedIn={setIsLoggedIn} />}
-          </Tab.Screen> :
+              return <Ionicons name={iconName} size={size} color={color} />;
+            },
+            header: ({route}) => {
+              return <Text style={Base.base}></Text>
+            },
+            tabBarActiveTintColor: 'black',
+            tabBarInactiveTintColor: 'gray',
+          })}
+        >
+          <Tab.Screen name="Försening">
+            {() => <Delay delays={delays} setDelays={setDelays} setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />}
+          </Tab.Screen>
+          {isLoggedIn ?
+          <Tab.Screen name="Favoriter">
+            {() => <Favourite delays={delays} setDelays={setDelays} setIsLoggedIn={setIsLoggedIn}/>}
+          </Tab.Screen>:
           <Tab.Screen name="Logga in">
             {() => <Auth setIsLoggedIn={setIsLoggedIn} />}
           </Tab.Screen>
         }
-        <Tab.Screen name="Leverans">
-          {() => <Ship/>}
-        </Tab.Screen>
-
-        
-    </Tab.Navigator>
+        </Tab.Navigator>
       </NavigationContainer>
       <StatusBar style="auto" />
       <FlashMessage position="top" />

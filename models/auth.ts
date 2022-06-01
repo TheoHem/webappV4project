@@ -14,11 +14,11 @@ const auth = {
     },
     login: async function login(email: string, password: string) {
         const data = {
-            api_key: config.api_key,
+            api_key: config.auth_api_key,
             email: email,
             password: password,
         };
-        const response = await fetch(`${config.base_url}/auth/login`, {
+        const response = await fetch(`${config.auth_url}/login`, {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -45,11 +45,11 @@ const auth = {
     },
     register: async function register(email: string, password: string) {
         const data = {
-            api_key: config.api_key,
+            api_key: config.auth_api_key,
             email: email,
             password: password,
         };
-        const response = await fetch(`${config.base_url}/auth/register`, {
+        const response = await fetch(`${config.auth_url}/register`, {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
